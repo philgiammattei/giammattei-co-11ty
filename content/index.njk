@@ -1,28 +1,44 @@
 ---
 layout: layouts/home.njk
-eleventyNavigation:
-  key: Home
-  order: 1
 numberOfLatestPostsToShow: 3
 ---
-{% set postsCount = collections.posts | length %}
-{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
+
+<div class="intro">
+  <h2>Hi there! I'm <em>Phil.</em></h2>
+  <hr />
+  <h3>I am a versatile and curious web developer and software engineer.</h3>
+  <a href="mailto:phil@giammattei.co">
+    <button type="button" name="contactbutton">
+      <h6>Let's talk.</h6>
+    </button>
+  </a>
+</div>
+
+<h2>Projects:</h2>
+{% for project in collections.projects %}
+ <h3>{{project.data.title}}</h3>
+ <img src="hello.jpg">
+{% endfor %}
+
+{% set postsCount = collections.posts | length %} {% set latestPostsCount =
+postsCount | min(numberOfLatestPostsToShow) %}
+<h1>
+  Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}
+</h1>
 
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-{% set postslistCounter = postsCount %}
-{% include "postslist.njk" %}
-
-{% set morePosts = postsCount - numberOfLatestPostsToShow %}
-{% if morePosts > 0 %}
-<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
-{% endif %}
-
-{# List every content page in the project #}
-{#
+{% set postslistCounter = postsCount %} {% include "postslist.njk" %} {% set
+morePosts = postsCount - numberOfLatestPostsToShow %} {% if morePosts > 0 %}
+<p>
+  {{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in
+  <a href="/blog/">the archive</a>.
+</p>
+{% endif %} {# List every content page in the project #}{#
 <ul>
-	{%- for entry in collections.all %}
-	<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
-	{%- endfor %}
+  {%- for entry in collections.all %}
+  <li>
+    <a href="{{ entry.url }}"><code>{{ entry.url }}</code></a>
+  </li>
+  {%- endfor %}
 </ul>
 #}
